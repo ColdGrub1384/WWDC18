@@ -1,5 +1,7 @@
 //: Don't pass with the red traffic light!
 
+// BE SURE TO OPEN THE ASSISTANT EDITOR!
+
 import PlaygroundSupport
 import SpriteKit
 
