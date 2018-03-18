@@ -27,7 +27,6 @@ open class TrafficLight: SKReferenceNode {
         
         self.node = node
         
-        
         func changeState() {
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (_) in
                 
@@ -57,6 +56,20 @@ open class TrafficLight: SKReferenceNode {
             
             changeState()
         })
+        
+        
+        var count = 0
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+            
+            node?.childNode(withName: "car")?.position.x -= 30
+            
+            count += 1
+            
+            if count >= 8000 {
+                timer.invalidate()
+            }
+        })
+        
     }
     
     override init(fileNamed fileName: String?) {
