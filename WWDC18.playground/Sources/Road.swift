@@ -78,6 +78,14 @@ open class Road: SKScene {
             addChild(trafficLight)
             lastTrafficLight = trafficLight
         }
+        
+        if let car = car as? ReferenceNode {
+            if (car.childNode?.childNode(withName: "car")?.zRotation ?? 0) != 0 {
+                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                    self.view?.presentScene(GameOver(fileNamed: "gameOver"))
+                })
+            }
+        }
     }
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
