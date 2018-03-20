@@ -58,15 +58,27 @@ open class TrafficLight: SKReferenceNode {
         })
         
         
-        var count = 0
+        guard let car = node?.childNode(withName: "car") else {
+            return
+        }
+        
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
             
-            node?.childNode(withName: "car")?.position.x -= 30
+            car.position.x -= 30
             
-            count += 1
-            
-            if count >= 8000 {
+            if car.position.x <= -290 {
                 timer.invalidate()
+                
+                car.zRotation += 1.5708
+                
+                _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+                    
+                    car.position.y -= 30
+                    
+                    if car.parent == nil {
+                        timer.invalidate()
+                    }
+                })
             }
         })
         
