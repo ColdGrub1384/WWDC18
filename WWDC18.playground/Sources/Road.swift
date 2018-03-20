@@ -5,6 +5,7 @@ open class Road: SKScene {
     var car: SKNode?
     var isCarPaused = false
     var lastTrafficLight: TrafficLight?
+    let audio = SKAudioNode(fileNamed: "car.wav")
     
     var startPoint: SKNode {
         if let node = childNode(withName: "startPoint") {
@@ -20,6 +21,13 @@ open class Road: SKScene {
         } else {
             fatalError("End point not found!")
         }
+    }
+    
+    open override func didMove(to view: SKView) {
+        super.didMove(to: view)
+        
+        addChild(audio)
+        audio.run(SKAction.play())
     }
     
     open override func update(_ currentTime: TimeInterval) {
@@ -92,9 +100,11 @@ open class Road: SKScene {
         
         if car?.hasActions() ?? false {
             isCarPaused = true
+            audio.run(SKAction.stop())
             car?.removeAllActions()
         } else {
             isCarPaused = false
+            audio.run(SKAction.play())
             car?.run(SKAction.moveBy(x: 0, y: 1000, duration: 5))
         }
     }
