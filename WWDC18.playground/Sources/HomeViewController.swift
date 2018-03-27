@@ -18,6 +18,7 @@ open class HomeViewController: UIViewController {
         sceneView = SKView(frame: CGRect(origin: CGPoint(x: 0, y: 20), size: CGSize(width: backgroundView.frame.width, height: backgroundView.frame.height-20)))
         sceneView.clipsToBounds = true
         sceneView.layer.cornerRadius = 20
+        sceneView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         sceneView.isOpaque = false
         
         let titleLabel = UILabel(frame: CGRect(x: 10, y: 20, width: backgroundView.frame.width, height: 40))
